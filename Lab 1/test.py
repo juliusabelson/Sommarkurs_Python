@@ -48,7 +48,7 @@ def run(src_path=None):
 		fun_count = fun_count + 1
 		test(wordfreq.tokenize, [], [])
 		test(wordfreq.tokenize, [""], [])
-		#test(wordfreq.tokenize, ["   "], [])
+		test(wordfreq.tokenize, ["   "], [])
 		test(wordfreq.tokenize, ["This is a simple sentence"], ["this","is","a","simple","sentence"])
 		test(wordfreq.tokenize, ["I told you!"], ["i","told","you","!"])
 		test(wordfreq.tokenize, ["The 10 little chicks"], ["the","10","little","chicks"])
