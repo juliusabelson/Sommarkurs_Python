@@ -68,7 +68,10 @@ def printTopMost(frequencies,n):
     retFreq = []
     for word,freq in frequencies.items():
         retFreq.append((word.ljust(20), freq))
+
     retFreq = sorted(retFreq, key=lambda x: -x[1])
     
     retFreq = retFreq[0:n]
-    return retFreq
+
+    for things in retFreq:
+        print(things[0] + str(things[1]).rjust(5))
