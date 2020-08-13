@@ -31,9 +31,7 @@ def main():
 
     countedWords = wordfreq.countWords(toknedWords, stopWords)
 
-    topWords = wordfreq.printTopMost(countedWords, n)
-
-    print(topWords)
+    wordfreq.printTopMost(countedWords, n)
 
 
 
