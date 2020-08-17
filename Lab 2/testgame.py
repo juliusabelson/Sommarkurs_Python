@@ -124,8 +124,9 @@ def runTests(game):
     # A few additional hints
     gameAtts = len(game.__dict__.items())
     if (gameAtts > 6):
-        print("Your Game object has {} attributes. This isn't necessarily wrong, but 5-6 seems like a nice number.".format(gameAtts))
-        print("Make sure you are not representing the same information in multiple attributes.")
+        pass
+        #print("Your Game object has {} attributes. This isn't necessarily wrong, but 5-6 seems like a nice number.".format(gameAtts))
+        #print("Make sure you are not representing the same information in multiple attributes.")
     playerAtts = len(game.getCurrentPlayer().__dict__.items())
     if (playerAtts > 8):
         print("Your Player object has {} attributes. This isn't necessarily wrong, but it seems a bit high.".format(playerAtts))

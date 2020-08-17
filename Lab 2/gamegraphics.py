@@ -14,7 +14,9 @@
 
 # This is the only place where graphics should be imported!
 from graphics import *
+from gamemodel import *
 
+class GraphicGame:
 # TODO: There needs to be a class called GraphicGame here. 
 # Its constructor should take only a Game object.
 # TODO: In addition to the methods of Game, GraphicGame needs to have a getWindow method that returns the main GraphWin object the game is played in
@@ -25,13 +27,66 @@ from graphics import *
 # HINT: Don't forget to call draw() on every component you create, otherwise they will not be visible
 # HINT: You need to get the Players from the Game object (the model), wrap them into GraphicPlayers and store them, and all get-methods for players (e.g. getCurrentPlayer) must return the Graphical versions
 
-class GraphicPlayer:
-    # TODO: We need a constructor here! The constructor needs to take a Player object as parameter and store it in self.player for the methods below to work.
-    # HINT: The constructor should create and draw the graphical elements of the player (score and cannon)
-    # HINT: The constructor probably needs a few additional parameters e.g. to access the game window.
+    def __init__(self, game):
+        self.win = GraphWin("Cannon game" , 640, 480, autoflush=False)
+        self.win.setCoords(-110, -10, 110, 155)
+        
+        self.model = game
+        self.model.players[0] = GraphicPlayer(self.model.players[0], self.model, self.win)
+        self.model.players[1] = GraphicPlayer(self.model.players[1], self.model, self.win)
+
+
+    """ A list containing both players """
+    def getPlayers(self):
+        return self.model.getPlayers()
+
+    """ The height/width of the cannon """
+    def getCannonSize(self):
+        return self.model.getCannonSize()
+
+    """ The radius of cannon balls """
+    def getBallSize(self):
+        return self.model.getBallSize()
+
+    """ The current player, i.e. the player whose turn it is """
+    def getCurrentPlayer(self):
+        return self.model.getCurrentPlayer()
+
+    """ The opponent of the current player """
+    def getOtherPlayer(self):
+        return self.model.getOtherPlayer()
     
+    """ The number (0 or 1) of the current player. This should be the position of the current player in getPlayers(). """
+    def getCurrentPlayerNumber(self):
+        return self.model.getCurrentPlayerNumber()
+    
+    """ Switch active player """
+    def nextPlayer(self):
+        self.model.nextPlayer()
+
+    """ Set the current wind speed, only used for testing """
+    def setCurrentWind(self, wind):
+        self.model.setCurrentWind(wind)
+
+    """ Set the current wind speed, only used for testing """
+    def getCurrentWind(self):
+        return self.model.setCurrentWind()
+
+    """ Start a new round with a random wind value (-10 to +10) """
+    def newRound(self):
+        self.model.newRound()
+        
+class GraphicPlayer:
+
+    def __init__(self, player, gameModel, win):
+        self.player = player
+        self.gameModel = gameModel
+        self.win = win
+        self.proj = None
+
+
+
     def fire(self, angle, vel):
-        # Fire the cannon of the underlying player object
         proj = self.player.fire(angle, vel)
         
         #TODO: We need to undraw the old GraphicProjectile for this player (if there is one).

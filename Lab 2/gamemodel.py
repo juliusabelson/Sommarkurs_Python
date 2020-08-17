@@ -56,7 +56,6 @@ class Game:
     def setCurrentWind(self, wind):
         self.wind = wind
 
-    
     def getCurrentWind(self):
         return self.wind
 
@@ -64,7 +63,7 @@ class Game:
     def newRound(self):
         randwind = random.randint(-10,10)
         self.wind = randwind
-        self.getCurrentPlayer().increaseScore()
+        
 
 """ Models a player """
 class Player:
