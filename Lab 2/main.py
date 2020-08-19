@@ -1,9 +1,6 @@
-# Imports everything from both model and graphics
 from gamemodel import *
 from gamegraphics import *
 
-# Here is a nice little method you get for free
-# It fires a shot for the current player and animates it until it stops
 def graphicFire(game, angle, vel):
     player = game.getCurrentPlayer()
     # create a shot and track until it hits ground or leaves window

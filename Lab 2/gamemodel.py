@@ -7,12 +7,11 @@ import random
 class Game:
     """ Create a game with a given size of cannon (length of sides) and projectiles (radius) """
     def __init__(self, cannonSize, ballSize):
-        p1 = Player("blue", -90, 0, self, 0)
-        p2 = Player("red", 90, 1, self, 0)
+        p1 = Player("blue", -90, 0, self)
+        p2 = Player("red", 90, 1, self)
         self.players = [p1,p2]
-        self.currentPlayer = p1
-        self.otherPlayer = p2
-        self.currentPlayerNumber = 0
+        self.currentPlayer = 0
+        self.otherPlayer = 1
         self.wind = 0
         self.cannonsize = cannonSize
         self.ballsize = ballSize
@@ -31,26 +30,21 @@ class Game:
 
     """ The current player, i.e. the player whose turn it is """
     def getCurrentPlayer(self):
-        return self.currentPlayer
+        return self.players[self.currentPlayer]
 
     """ The opponent of the current player """
     def getOtherPlayer(self):
-        return self.otherPlayer
+        return self.players[self.otherPlayer]
     
     """ The number (0 or 1) of the current player. This should be the position of the current player in getPlayers(). """
     def getCurrentPlayerNumber(self):
-        return self.currentPlayerNumber
+        return self.currentPlayer
     
     """ Switch active player """
     def nextPlayer(self):
-        if self.currentPlayerNumber == 0:
-            self.currentPlayerNumber = 1
-            self.currentPlayer = self.players[1]
-            self.otherPlayer = self.players[0]
-        else:
-            self.currentPlayerNumber = 0
-            self.currentPlayer = self.players[0]
-            self.otherPlayer = self.players[1]
+        tmp_player = self.currentPlayer
+        self.currentPlayer = self.otherPlayer
+        self.otherPlayer = tmp_player
 
     """ Set the current wind speed, only used for testing """
     def setCurrentWind(self, wind):
@@ -67,16 +61,17 @@ class Game:
 
 """ Models a player """
 class Player:
-    def __init__(self, col, pos, numb, game, score):
+    def __init__(self, col, pos, numb, game):
         self.color = col
         self.position = pos
         self.playerNumber = numb
         self.Game = game
-        self.score = score
+        self.score = 0
+
 
     """ Create and return a projectile starting at the centre of this players cannon. Replaces any previous projectile for this player. """
     def fire(self, angle, velocity):
-        if self == self.Game.getPlayers()[1] :
+        if self == self.Game.getPlayers()[1]:
             velocity = -velocity
             angle = -angle
 
@@ -88,40 +83,24 @@ class Player:
 
     """ Gives the x-distance from this players cannon to a projectile. If the cannon and the projectile touch (assuming the projectile is on the ground and factoring in both cannon and projectile size) this method should return 0"""
     def projectileDistance(self, proj):
-        mid_cannon = self.getX()
-        cannonDiff = self.Game.getCannonSize()/2
+        cannonMid = self.getX()
+        cannonMaxMin = self.Game.getCannonSize()/2
 
-        cannon_Pos = [mid_cannon - cannonDiff, mid_cannon + cannonDiff]
+        cannonMin = cannonMid - cannonMaxMin
+        cannonMax = cannonMid + cannonMaxMin
 
-        mid_proj = proj.getX()
-        projDiff = self.Game.getBallSize()
+        projMid = proj.getX()
+        projMaxMin = self.Game.getBallSize()
 
-        proj_Pos = [mid_proj - projDiff, mid_proj + projDiff]
+        projMin = projMid - projMaxMin
+        projMax = projMid + projMaxMin
 
-        if proj_Pos[0] > cannon_Pos[1]:
-            return proj_Pos[0] - cannon_Pos[1]
-        elif proj_Pos[1] < cannon_Pos[0]:
-            return proj_Pos[1] - cannon_Pos[0]
+        if projMin > cannonMax:
+            return projMin - cannonMax
+        elif projMax < cannonMin:
+            return projMax - cannonMin
         else:
             return 0
-
-        
-        '''
-        cann_left = self.getX() - self.Game.getCannonSize()
-        cann_right = self.getX() + self.Game.getCannonSize()
-
-        proj_left = proj.getX() - self.Game.getBallSize()
-        proj_right = proj.getX() + self.Game.getBallSize()
-
-        
-        if cann_left > proj_right:
-            dist = proj_right - cann_left
-        elif cann_right < proj_left:
-            dist = proj_left - cann_right
-        else:
-            dist = 0
-        '''
-
 
     """ The current score of this player """
     def getScore(self):
