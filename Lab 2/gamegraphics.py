@@ -142,7 +142,7 @@ class GraphicProjectile:
         self.gameModel = gameModel
         self.win = win
 
-        self.circle = Circle(Point(self.getX(), self.getY()), 5)
+        self.circle = Circle(Point(self.getX(), self.getY()), self.gameModel.getBallSize())
         self.circle.setFill(self.player.getColor())
         self.circle.draw(self.win)
 

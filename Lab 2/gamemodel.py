@@ -78,6 +78,7 @@ class Player:
         
         self.angle = angle
         self.velocity = velocity
+        
         projectile = Projectile(angle, velocity, self.Game.getCurrentWind(), self.getX(), self.Game.getCannonSize()/2, -110, 110)
         return projectile 
 
