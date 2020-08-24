@@ -21,7 +21,7 @@ def getInput(graphicgame):
     print('The wind is howling at a good {0:.1f} speed'.format(graphicgame.getCurrentWind()))
     print('Previous angle was {0:.1f}, enter new angle'.format(oldAngle))
 
-    box = InputDialog(oldAngle, oldVel, graphicgame.getCurrentWind())
+    box = InputDialog(, 30, graphicgame.getCurrentWind())
     box.interact()
     newAngle, newVel = box.getValues()
     box.close()
