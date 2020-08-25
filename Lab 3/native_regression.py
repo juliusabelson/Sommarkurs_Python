@@ -3,8 +3,8 @@ import sys
 import matplotlib.pyplot as plt
 
 def main():
-    #matrix = loadtxt(sys.argv[1])
-    matrix = loadtxt("chirps.txt")
+    matrix = loadtxt(sys.argv[1])
+    #matrix = loadtxt("chirps.txt")
     
     X = [row[0] for row in matrix]
     Y = [row[1] for row in matrix]
