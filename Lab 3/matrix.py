@@ -54,3 +54,9 @@ def invert(matrix):
     respVal[0][1] = -matrix[0][1]/det
     respVal[1][1] = matrix[0][0]/det
     return respVal
+
+def loadtxt(filepath):
+    file = open(filepath, "r")
+    respVal = [list(map(float, lines.strip().split("\t"))) for lines in file]
+
+    return respVal
