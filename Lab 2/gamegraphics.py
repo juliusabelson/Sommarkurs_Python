@@ -142,18 +142,20 @@ class GraphicProjectile:
         self.gameModel = gameModel
         self.win = win
 
+
         self.circle = Circle(Point(self.getX(), self.getY()), self.gameModel.getBallSize())
         self.circle.setFill(self.player.getColor())
         self.circle.draw(self.win)
 
     def update(self, dt):
         ytmp = self.proj.getY()
-        xtmp = self.proj.getY()
+        xtmp = self.proj.getX()
 
         self.proj.update(dt)
         
-        dy = self.getY() - ytmp
-        dx = self.getX() - xtmp
+        dy = self.proj.getY() - ytmp
+        dx = self.proj.getX() - xtmp
+        
         self.circle.move(dx, dy)
 
         
