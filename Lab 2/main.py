@@ -22,9 +22,11 @@ def getInput(graphicgame):
     print('Previous angle was {0:.1f}, enter new angle'.format(oldAngle))
 
     box = InputDialog(oldAngle, oldVel, graphicgame.getCurrentWind())
-    box.interact()
-    newAngle, newVel = box.getValues()
-    box.close()
+    if (box.interact() == "Quit"):
+        sys.exit()
+    else:
+        newAngle, newVel = box.getValues()
+        box.close()
 
     return newAngle, newVel
 
