@@ -12,7 +12,8 @@ class Game:
         self.players = [p1,p2]
         self.currentPlayer = 0
         self.otherPlayer = 1
-        self.wind = 0
+        randwind = random.randint(-10,10)
+        self.wind = randwind
         self.cannonsize = cannonSize
         self.ballsize = ballSize
 
